@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>bonita-connector-alfresco</artifactId>
+		<groupId>org.bonitasoft.connectors</groupId>
+		<version>6.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>bonita-connector-alfresco42-deleteitem-def</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.abdera</groupId>
+            <artifactId>abdera-client</artifactId>
+            <version>1.1.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mail</artifactId>
+                    <groupId>javax.mail</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>
