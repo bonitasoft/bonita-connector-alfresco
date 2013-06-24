@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+
+	<definitionId>Alfresco42CreateFolderByPath</definitionId>
+	<definitionVersion>1.0.0</definitionVersion>
+	<description>Implementation based on alfresco community 42</description>
+	<implementationClassname>org.bonitasoft.connectors.alfresco34.CreateFolderByPathConnector</implementationClassname>
+	<implementationId>alfresco42-createfolder-impl</implementationId>
+	<implementationVersion>1.0.3</implementationVersion>
+
+    $Dependencies$
+</implementation:connectorImplementation>
