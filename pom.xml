@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>bonita-connector-alfresco</artifactId>
-    <version>6.1.0-SNAPSHOT</version>
+    <version>6.1.0-rc-02</version>
     <packaging>pom</packaging>
     <name>bonita-connector-alfresco</name>
     <modules>
@@ -48,7 +48,7 @@
     </build>
 
     <scm>
-        <developerConnection>scm:svn:https://svn.bonitasoft.org/bonita-connectors-6/trunk/connectors/bonita-connector-alfresco/</developerConnection>
+        <developerConnection>scm:svn:https://svn.bonitasoft.org/bonita-connectors-6/tags/connectors/bonita-connector-alfresco/bonita-connector-alfresco-6.1.0-rc-02</developerConnection>
     </scm>
 
 </project>
