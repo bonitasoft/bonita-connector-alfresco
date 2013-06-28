@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<icon>alfresco.jpg</icon>
 
-	<category id="Alfresco34" icon="alfresco.jpg" />
+	<category id="Alfresco34" icon="alfresco.jpg" parentCategoryId="Alfresco" />
 
 	<input name="host" type="java.lang.String" mandatory="true" defaultValue="localhost" />
 	<input name="port" type="java.lang.Long" mandatory="true" defaultValue="8080" />
