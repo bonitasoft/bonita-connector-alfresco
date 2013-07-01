@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>bonita-connectors</artifactId>
+        <groupId>org.bonitasoft.connectors</groupId>
+        <version>6.0.1</version>
+    </parent>
+
+    <artifactId>bonita-connector-alfresco</artifactId>
+    <version>6.0.1</version>
+    <packaging>pom</packaging>
+    <name>bonita-connector-alfresco</name>
+    <modules>
+        <module>bonita-connector-alfresco34-common</module>
+        <module>bonita-connector-alfresco34-createfolder-def</module>
+        <module>bonita-connector-alfresco34-createfolder-impl</module>
+        <module>bonita-connector-alfresco34-deletefolder-def</module>
+        <module>bonita-connector-alfresco34-deletefolder-impl</module>
+        <module>bonita-connector-alfresco34-deleteitem-def</module>
+        <module>bonita-connector-alfresco34-deleteitem-impl</module>
+        <module>bonita-connector-alfresco34-uploadfile-def</module>
+        <module>bonita-connector-alfresco34-uploadfile-impl</module>
+        <module>bonita-connector-alfresco42-createfolder-def</module>
+        <module>bonita-connector-alfresco42-createfolder-impl</module>
+        <module>bonita-connector-alfresco42-deletefolder-def</module>
+        <module>bonita-connector-alfresco42-deletefolder-impl</module>
+        <module>bonita-connector-alfresco42-deleteitem-def</module>
+        <module>bonita-connector-alfresco42-deleteitem-impl</module>
+        <module>bonita-connector-alfresco42-uploadfile-def</module>
+        <module>bonita-connector-alfresco42-uploadfile-impl</module>
+        <module>bonita-connector-alfresco42-test</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <tagBase>https://svn.bonitasoft.org/bonita-connectors-6/tags/connectors/bonita-connector-alfresco/</tagBase>
+                    <preparationGoals>clean install</preparationGoals>
+                    <goals>deploy</goals>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <developerConnection>scm:svn:https://svn.bonitasoft.org/bonita-connectors-6/tags/connectors/bonita-connector-alfresco/bonita-connector-alfresco-6.0.1</developerConnection>
+    </scm>
+
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
+
+	<definitionId>Alfresco34UploadFileByPath</definitionId>
+	<definitionVersion>1.0.0</definitionVersion>
+	<description>Implementation based on alfresco community 3.4</description>
+	<implementationClassname>org.bonitasoft.connectors.alfresco34.UploadFileConnector</implementationClassname>
+	<implementationId>alfresco34-uploadfile-impl</implementationId>
+	<implementationVersion>1.0.3</implementationVersion>
+
+    $Dependencies$
+</implementation:connectorImplementation>
