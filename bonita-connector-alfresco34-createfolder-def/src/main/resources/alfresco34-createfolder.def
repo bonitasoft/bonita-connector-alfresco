@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<icon>alfresco.jpg</icon>
 
-	<category id="cms" icon="cms.gif" />
+	<category id="cms" icon="CMS.png" />
 	<category id="Alfresco" icon="alfresco.jpg" parentCategoryId="cms"/>
 	<category id="Alfresco34" icon="alfresco.jpg" parentCategoryId="Alfresco" />
 
