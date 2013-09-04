@@ -23,12 +23,13 @@
 				<exclusion>
 					<artifactId>xml-apis</artifactId>
 					<groupId>xml-apis</groupId>
-				</exclusion>			</exclusions>
+				</exclusion>			
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.7</version>
+			<version>1.4</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
