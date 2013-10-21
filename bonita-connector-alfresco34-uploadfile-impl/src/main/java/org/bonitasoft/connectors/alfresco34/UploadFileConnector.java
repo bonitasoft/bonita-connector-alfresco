@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.connectors.alfresco34;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class UploadFileConnector extends AlfrescoConnector {
 
     public static final String DESTINATION_FOLDER = "destinationFolder";
 
-    private Object fileObject;
+    private String fileObject;
 
     private String fileName;
 
@@ -66,7 +67,7 @@ public class UploadFileConnector extends AlfrescoConnector {
     }
 
     private void fillInputParameters() {
-        this.fileObject = this.getInputParameter(FILE_OBJECT);
+        this.fileObject = (String) this.getInputParameter(FILE_OBJECT);
         LOGGER.info(FILE_OBJECT + " " + fileObject);
         this.fileName = (String) this.getInputParameter(FILE_NAME);
         LOGGER.info(FILE_NAME + " " + fileName);
@@ -79,17 +80,17 @@ public class UploadFileConnector extends AlfrescoConnector {
 
     @Override
     protected AlfrescoResponse executeFunction(final AlfrescoRestClient alfrescoClient) throws Exception {
-        if (this.fileObject instanceof String) {
-            return alfrescoClient.uploadFileByPath((String) this.fileObject, this.fileName, this.description, this.mimeType, this.destinationFolder);
-        } else if (this.fileObject instanceof Document) {
-            final Document document = (Document) this.fileObject;
-            final ProcessAPI processAPI = this.getAPIAccessor().getProcessAPI();
-            final byte[] content = processAPI.getDocumentContent(document.getContentStorageId());
-            return alfrescoClient.uploadFileFromDocument((Document) this.fileObject, content, this.fileName, this.description, this.mimeType,
-                    this.destinationFolder);
+    	ProcessAPI processAPI = getAPIAccessor().getProcessAPI();
+    	long processInstanceId = getExecutionContext().getProcessInstanceId();
+		Document document = processAPI.getLastDocument(processInstanceId, this.fileObject);
+		if (document != null) {
+	            final byte[] content = processAPI.getDocumentContent(document.getContentStorageId());
+	            return alfrescoClient.uploadFileFromDocument(document, content, this.fileName, this.description, this.mimeType,
+	                    this.destinationFolder);
+		}else if(new File(fileObject).exists()){          
+			return alfrescoClient.uploadFileByPath((String) this.fileObject, this.fileName, this.description, this.mimeType, this.destinationFolder);
         } else {
-            throw new Exception("Unsupported class for file upload: " + this.fileObject.getClass().getName()
-                    + ". Supported classes: String, AttachmentInstance, Document");
+            throw new Exception("File to upload input parameter ("+fileObject+") is neither a document reference nor a a valid file path");
         }
     }
 
