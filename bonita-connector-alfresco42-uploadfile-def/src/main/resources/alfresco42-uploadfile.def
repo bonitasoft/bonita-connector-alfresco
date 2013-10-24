@@ -32,7 +32,7 @@
 	</page>
 
 	<page id="FunctionParameters">
-		<widget id="fileObject" inputName="fileObject" xsi:type="definition:Text" />
+		<widget id="fileObject" inputName="fileObject" xsi:type="definition:Text" showDocuments="true"/>
 		<widget id="fileName" inputName="fileName" xsi:type="definition:Text" />
 		<widget id="description" inputName="description" xsi:type="definition:Text" />
 		<widget id="mimeType" inputName="mimeType" xsi:type="definition:Text" />
