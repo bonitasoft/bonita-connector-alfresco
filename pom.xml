@@ -5,11 +5,10 @@
     <parent>
         <artifactId>bonita-connectors</artifactId>
         <groupId>org.bonitasoft.connectors</groupId>
-        <version>6.1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>bonita-connector-alfresco</artifactId>
-    <version>6.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>bonita-connector-alfresco</name>
     <modules>
@@ -32,12 +31,27 @@
         <module>bonita-connector-alfresco42-uploadfile-impl</module>
     </modules>
 
+	<properties>
+		<bonita.engine.version>6.2.0</bonita.engine.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<!-- Latest Version of Bonita released, against which the initial development 
+				has been done. -->
+			<!-- The connector will be tested against more recent version -->
+			<artifactId>bonita-common</artifactId>
+			<groupId>org.bonitasoft.engine</groupId>
+			<version>${bonita.engine.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.4</version>
             </plugin>
         </plugins>
     </build>
