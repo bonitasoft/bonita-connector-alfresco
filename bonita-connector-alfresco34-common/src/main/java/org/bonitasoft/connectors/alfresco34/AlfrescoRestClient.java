@@ -792,6 +792,7 @@ public class AlfrescoRestClient {
 
         if (length > Integer.MAX_VALUE) {
             // File is too large
+            is.close();
             throw new IOException("File too long");
         }
 
@@ -807,6 +808,7 @@ public class AlfrescoRestClient {
 
         // Ensure all the bytes have been read in
         if (offset < bytes.length) {
+            is.close();
             throw new IOException("Could not completely read file " + file.getName());
         }
 
