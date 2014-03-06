@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-common</artifactId>
-			<version>1.0.0</version>
+			<version>${alfresco.common.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
