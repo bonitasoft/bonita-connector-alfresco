@@ -9,7 +9,8 @@
 	</parent>
 	
 	<artifactId>bonita-connector-alfresco42-uploadfile-impl</artifactId>
-
+	<version>1.0.3</version>
+	
     <properties>
         <implementation.id>alfresco42-uploadfile</implementation.id>
     </properties>
@@ -18,12 +19,12 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-uploadfile-impl</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco42-uploadfile-def</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 	

@@ -9,7 +9,8 @@
 	</parent>
 	
 	<artifactId>bonita-connector-alfresco42-deleteitem-impl</artifactId>
-
+	<version>1.0.3</version>
+	
     <properties>
         <implementation.id>alfresco42-deleteitem</implementation.id>
     </properties>
@@ -19,12 +20,12 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-deletefolder-impl</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco42-deleteitem-def</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 	

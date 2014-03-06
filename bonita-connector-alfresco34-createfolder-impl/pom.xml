@@ -10,7 +10,8 @@
 	</parent>
 
 	<artifactId>bonita-connector-alfresco34-createfolder-impl</artifactId>
-
+	<version>1.0.3</version>
+	
 	<properties>
 		<implementation.id>alfresco34-createfolder</implementation.id>
 	</properties>
@@ -19,12 +20,12 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-common</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-createfolder-def</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
