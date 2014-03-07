@@ -6,7 +6,7 @@
 	<description>Implementation based on alfresco community 34</description>
 	<implementationClassname>org.bonitasoft.connectors.alfresco34.CreateFolderByPathConnector</implementationClassname>
 	<implementationId>alfresco34-createfolder-impl</implementationId>
-	<implementationVersion>1.0.3</implementationVersion>
+	<implementationVersion>$implementation.version$</implementationVersion>
 
     $Dependencies$
 </implementation:connectorImplementation>
