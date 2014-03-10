@@ -11,6 +11,7 @@
 
 	<artifactId>bonita-connector-alfresco</artifactId>
 	<packaging>pom</packaging>
+	<version>6.3.0-SNAPSHOT</version>
 
 	<modules>
 		<module>bonita-connector-alfresco34-common</module>
@@ -34,7 +35,7 @@
 
 	<properties>
 		<bonita.engine.version>6.2.0</bonita.engine.version>
-		<alfresco.common.version>1.0.0</alfresco.common.version>
+		<alfresco.common.version>${project.version}</alfresco.common.version>
 	</properties>
 
 	<dependencies>
