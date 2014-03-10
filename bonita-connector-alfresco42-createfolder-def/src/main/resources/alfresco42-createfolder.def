@@ -3,7 +3,7 @@
 	xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<id>Alfresco42CreateFolderByPath</id>
-	<version>1.0.0</version>
+	<version>$definition.version$</version>
 	<icon>alfresco.jpg</icon>
 
 	<category id="cms" icon="cms.jpg" />

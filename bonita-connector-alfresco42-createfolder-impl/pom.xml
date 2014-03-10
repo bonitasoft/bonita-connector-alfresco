@@ -11,9 +11,9 @@
 	<artifactId>bonita-connector-alfresco42-createfolder-impl</artifactId>
 	<version>1.0.3</version>
    
-    <properties>
-        <implementation.id>alfresco42-createfolder</implementation.id>
-    </properties>
+   <properties>
+		<definition.version>1.0.0</definition.version>
+	</properties>
 
     <dependencies>
 		<dependency>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco42-createfolder-def</artifactId>
-			<version>1.0.0</version>
+			<version>${definition.version}</version>
 		</dependency>
 	</dependencies>
 	
