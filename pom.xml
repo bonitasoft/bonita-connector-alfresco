@@ -11,7 +11,7 @@
 
 	<artifactId>bonita-connector-alfresco</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<modules>
 		<module>bonita-connector-alfresco34-common</module>
