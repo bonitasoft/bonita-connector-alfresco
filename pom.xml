@@ -74,6 +74,6 @@
 		<developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-alfresco.git</developerConnection>
 		<connection>scm:git:git@github.com:bonitasoft/bonita-connector-alfresco.git</connection>
 		<url>https://github.com/bonitasoft/bonita-connector-alfresco</url>
-		<tag>HEAD</tag>
+		<tag>master</tag>
 	</scm>
 </project>
