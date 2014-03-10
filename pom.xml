@@ -35,7 +35,6 @@
 
 	<properties>
 		<bonita.engine.version>6.2.0</bonita.engine.version>
-		<alfresco.common.version>1.0.0-SNAPSHOT</alfresco.common.version>
 	</properties>
 
 	<dependencies>
