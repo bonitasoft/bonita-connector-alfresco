@@ -3,7 +3,7 @@
 
 	<definitionId>Alfresco34DeleteFileByPath</definitionId>
 	<definitionVersion>$definition.version$</definitionVersion>
-	<description>Implementation based on alfresco community 4.2</description>
+	<description>Implementation based on alfresco community 3.4</description>
 	<implementationClassname>org.bonitasoft.connectors.alfresco34.DeleteFolderByPathConnector</implementationClassname>
 	<implementationId>alfresco34-deletefolder-impl</implementationId>
 	<implementationVersion>$implementation.version$</implementationVersion>

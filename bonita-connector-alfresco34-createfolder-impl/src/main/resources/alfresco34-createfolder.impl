@@ -3,7 +3,7 @@
 
 	<definitionId>Alfresco34CreateFolderByPath</definitionId>
 	<definitionVersion>$definition.version$</definitionVersion>
-	<description>Implementation based on alfresco community 34</description>
+	<description>Implementation based on alfresco community 3.4</description>
 	<implementationClassname>org.bonitasoft.connectors.alfresco34.CreateFolderByPathConnector</implementationClassname>
 	<implementationId>alfresco34-createfolder-impl</implementationId>
 	<implementationVersion>$implementation.version$</implementationVersion>
