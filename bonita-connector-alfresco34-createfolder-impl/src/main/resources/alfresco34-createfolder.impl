@@ -2,8 +2,8 @@
 <implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
 
 	<definitionId>Alfresco34CreateFolderByPath</definitionId>
-	<definitionVersion>1.0.0</definitionVersion>
-	<description>Implementation based on alfresco community 34</description>
+	<definitionVersion>$definition.version$</definitionVersion>
+	<description>Implementation based on alfresco community 3.4</description>
 	<implementationClassname>org.bonitasoft.connectors.alfresco34.CreateFolderByPathConnector</implementationClassname>
 	<implementationId>alfresco34-createfolder-impl</implementationId>
 	<implementationVersion>$implementation.version$</implementationVersion>

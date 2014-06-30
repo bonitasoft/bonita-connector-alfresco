@@ -5,14 +5,14 @@
 	<parent>
 		<artifactId>bonita-connector-alfresco</artifactId>
 		<groupId>org.bonitasoft.connectors</groupId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	
 	<artifactId>bonita-connector-alfresco34-deletefolder-impl</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	
     <properties>
-        <implementation.id>alfresco34-deletefolder</implementation.id>
+        <definition.version>1.0.0</definition.version>
     </properties>
 
 	<dependencies>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-deletefolder-def</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>${definition.version}</version>
 		</dependency>
 	</dependencies>
 	
