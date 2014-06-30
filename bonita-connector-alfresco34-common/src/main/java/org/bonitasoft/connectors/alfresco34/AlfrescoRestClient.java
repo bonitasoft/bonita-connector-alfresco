@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,16 +55,35 @@ public class AlfrescoRestClient {
 
     public static String CMIS = "cmis";
 
-    private final String server; // host + port
+    private String serverURL; // protocol + host + port
+
 
     private final String username;
 
     private final String password;
 
     public AlfrescoRestClient(final String host, final String port, final String user, final String passw) {
-        this.username = user;
-        this.password = passw;
-        this.server = "http://" + host + ":" + port;
+        username = user;
+        password = passw;
+        if (host != null && !host.trim().isEmpty()) {
+            try {
+                new URL(host).getProtocol();
+            } catch (final MalformedURLException e) {
+                LOGGER.warning(e.getMessage() + " for server url: " + host + ".\nUsing HTTP protocol as fallback.");
+                String hostWithoutProtocol = host;
+                if (host.contains("://")) {
+                    hostWithoutProtocol = host.substring(host.indexOf("://") + 3);
+                }
+                serverURL = "http://" + hostWithoutProtocol + ":" + port;
+            } finally {
+                if (serverURL == null) {
+                    serverURL = host + ":" + port;
+                }
+            }
+        } else {
+            serverURL = host + ":" + port;
+        }
+
     }
 
     /**
@@ -96,17 +117,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/p" + parentPath + "/children";
+        final String uri = serverURL + "/alfresco/s/cmis/p" + parentPath + "/children";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("POST " + uri);
         }
 
         final ClientResponse clientResponse = client.post(uri, entry, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -127,17 +148,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/p" + folderPath + "/children";
+        final String uri = serverURL + "/alfresco/s/cmis/p" + folderPath + "/children";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("GET " + uri);
         }
 
         final ClientResponse clientResponse = client.get(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -156,14 +177,14 @@ public class AlfrescoRestClient {
         }
 
         // use recursive algorithm to delete subFolder
-        final AlfrescoResponse response = this.listFolderByPath(folderPath);
+        final AlfrescoResponse response = listFolderByPath(folderPath);
         if (ResponseType.SUCCESS.toString().equals(response.getResponseType())) {
             final Document<Element> doc = response.getDocument();
             final Feed feed = (Feed) doc.getRoot();
             for (final Entry entry : feed.getEntries()) {
                 final String title = entry.getTitle();
                 final String subFolderPath = folderPath + "/" + title;
-                this.deleteFolderByPath(subFolderPath);
+                deleteFolderByPath(subFolderPath);
             }
         } else {
             throw new IOException();
@@ -172,17 +193,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/p" + folderPath;
+        final String uri = serverURL + "/alfresco/s/cmis/p" + folderPath;
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("DELETE " + uri);
         }
 
         final ClientResponse clientResponse = client.delete(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponse(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponse(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -205,17 +226,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/service/cmis/i/" + fileId + "/content";
+        final String uri = serverURL + "/alfresco/service/cmis/i/" + fileId + "/content";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("GET " + uri);
         }
 
         final ClientResponse clientResponse = client.get(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponseAsOutputFile(clientResponse, outputFileFolder, outputFileName);
+        final AlfrescoResponse alfResponse = parseResponseAsOutputFile(clientResponse, outputFileFolder, outputFileName);
         clientResponse.release();
         return alfResponse;
     }
@@ -240,17 +261,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/service/cmis/s/" + store + "/i/" + fileId + "/content";
+        final String uri = serverURL + "/alfresco/service/cmis/s/" + store + "/i/" + fileId + "/content";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("GET " + uri);
         }
 
         final ClientResponse clientResponse = client.get(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponseAsOutputFile(clientResponse, outputFileFolder, outputFileName);
+        final AlfrescoResponse alfResponse = parseResponseAsOutputFile(clientResponse, outputFileFolder, outputFileName);
         clientResponse.release();
         return alfResponse;
     }
@@ -346,17 +367,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/p" + destinationFolder + "/children";
+        final String uri = serverURL + "/alfresco/s/cmis/p" + destinationFolder + "/children";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("POST " + uri);
         }
 
         final ClientResponse clientResponse = client.post(uri, entry, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -398,17 +419,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/p" + destinationFolder + "/children";
+        final String uri = serverURL + "/alfresco/s/cmis/p" + destinationFolder + "/children";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("POST " + uri);
         }
 
         final ClientResponse clientResponse = client.post(uri, entry, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -430,17 +451,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/i/" + itemId;
+        final String uri = serverURL + "/alfresco/s/cmis/i/" + itemId;
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("DELETE " + uri);
         }
 
         final ClientResponse clientResponse = client.delete(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponse(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponse(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -474,17 +495,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/checkedout";
+        final String uri = serverURL + "/alfresco/s/cmis/checkedout";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("POST " + uri);
         }
 
         final ClientResponse clientResponse = client.post(uri, entry, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -504,17 +525,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/checkedout";
+        final String uri = serverURL + "/alfresco/s/cmis/checkedout";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("GET " + uri);
         }
 
         final ClientResponse clientResponse = client.get(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -536,17 +557,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/pwc/i/" + fileId;
+        final String uri = serverURL + "/alfresco/s/cmis/pwc/i/" + fileId;
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("DELETE " + uri);
         }
 
         final ClientResponse clientResponse = client.delete(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponse(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponse(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -597,17 +618,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/i/" + checkedOutFileId;
+        final String uri = serverURL + "/alfresco/s/cmis/i/" + checkedOutFileId;
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("PUT " + uri);
         }
 
         final ClientResponse clientResponse = client.put(uri, entry, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -637,18 +658,18 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/pwc/i/" + checkedOutFileId + "?checkin=true&major=" + isMajorVersion + "&checkinComment="
+        final String uri = serverURL + "/alfresco/s/cmis/pwc/i/" + checkedOutFileId + "?checkin=true&major=" + isMajorVersion + "&checkinComment="
                 + checkinComments;
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("PUT " + uri);
         }
 
         final ClientResponse clientResponse = client.put(uri, entry, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -669,17 +690,17 @@ public class AlfrescoRestClient {
         final AbderaClient client = new AbderaClient();
 
         // Authentication header
-        final String encodedCredential = Base64Coder.encodeString(this.username + ":" + this.password);
+        final String encodedCredential = Base64Coder.encodeString(username + ":" + password);
         final RequestOptions options = new RequestOptions();
         options.setHeader("Authorization", "Basic " + encodedCredential);
 
-        final String uri = this.server + "/alfresco/s/cmis/i/" + fileId + "/versions";
+        final String uri = serverURL + "/alfresco/s/cmis/i/" + fileId + "/versions";
         if (LOGGER.isLoggable(Level.INFO)) {
             LOGGER.info("GET " + uri);
         }
 
         final ClientResponse clientResponse = client.get(uri, options);
-        final AlfrescoResponse alfResponse = this.parseResponseWithDocument(clientResponse);
+        final AlfrescoResponse alfResponse = parseResponseWithDocument(clientResponse);
         clientResponse.release();
         return alfResponse;
     }
@@ -744,7 +765,7 @@ public class AlfrescoRestClient {
     @SuppressWarnings("unchecked")
     private AlfrescoResponse parseResponseWithDocument(final ClientResponse response) {
 
-        final AlfrescoResponse alfResponse = this.parseResponse(response);
+        final AlfrescoResponse alfResponse = parseResponse(response);
 
         if (ResponseType.SUCCESS == response.getType()) {
             final Document<Element> document = response.getDocument();
@@ -765,7 +786,7 @@ public class AlfrescoRestClient {
     private AlfrescoResponse parseResponseAsOutputFile(final ClientResponse response, final String outputFileFolder, final String outputFileName)
             throws IOException {
 
-        final AlfrescoResponse alfResponse = this.parseResponse(response);
+        final AlfrescoResponse alfResponse = parseResponse(response);
 
         if (ResponseType.SUCCESS == response.getType()) {
             if (response.getContentLength() > 0) {
@@ -815,6 +836,10 @@ public class AlfrescoRestClient {
         // Close the input stream and return bytes
         is.close();
         return bytes;
+    }
+
+    public String getServerURL() {
+        return serverURL;
     }
 
 }

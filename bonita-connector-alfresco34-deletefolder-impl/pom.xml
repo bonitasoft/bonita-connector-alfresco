@@ -9,7 +9,7 @@
 	</parent>
 	
 	<artifactId>bonita-connector-alfresco34-deletefolder-impl</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	
     <properties>
         <definition.version>1.0.0</definition.version>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-common</artifactId>
-			<version>${project.parent.version}</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>

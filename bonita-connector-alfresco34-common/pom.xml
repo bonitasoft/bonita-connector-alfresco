@@ -9,7 +9,8 @@
 	</parent>
 
     <artifactId>bonita-connector-alfresco34-common</artifactId>
-	
+	<version>1.0.1</version>
+    
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.abdera</groupId>
@@ -23,8 +24,24 @@
 				<exclusion>
 					<artifactId>xml-apis</artifactId>
 					<groupId>xml-apis</groupId>
-				</exclusion>			
+				</exclusion>
+                <exclusion>
+                   <groupId>org.codehaus.woodstox</groupId>
+                   <artifactId>wstx-asl</artifactId>
+                </exclusion>			
 			</exclusions>
+		</dependency>
+
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+            <scope>tests</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.assertj</groupId>
+		    <artifactId>assertj-core</artifactId>
+		    <version>1.6.1</version>
+		    <scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
