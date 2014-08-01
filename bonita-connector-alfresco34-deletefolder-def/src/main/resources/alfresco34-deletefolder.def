@@ -6,6 +6,8 @@
 	<version>$definition.version$</version>
 	<icon>alfresco.jpg</icon>
 
+	<category id="cms" icon="CMS.png" />
+	<category id="Alfresco" icon="alfresco.jpg" parentCategoryId="cms"/>
 	<category id="Alfresco34" icon="alfresco.jpg" parentCategoryId="Alfresco" />
 
 	<input name="host" type="java.lang.String" mandatory="true" defaultValue="localhost" />
