@@ -9,10 +9,10 @@
 	</parent>
 	
 	<artifactId>bonita-connector-alfresco34-deleteitem-impl</artifactId>
-	<version>1.0.4</version>
+	<version>1.1.0</version>
 	
     <properties>
-        <definition.version>1.0.0</definition.version>
+        <definition.version>1.1.0</definition.version>
     </properties>
 
 
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>
 			<artifactId>bonita-connector-alfresco34-common</artifactId>
-			<version>1.0.1</version>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.connectors</groupId>

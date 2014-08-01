@@ -57,21 +57,21 @@ public abstract class AlfrescoConnector extends AbstractConnector {
     public static final String STACK_TRACE = "stackTrace";
 
     // others
-    private Logger LOGGER = Logger.getLogger(this.getClass().getName());
+    private final Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
     @Override
     protected void executeBusinessLogic() throws ConnectorException {
         if (LOGGER.isLoggable(Level.INFO)) {
-            LOGGER.info("executing AlfrescoConnector with params: " + this.host + ":" + this.port.toString() + " " + this.username + ":" + this.password);
+            LOGGER.info("executing AlfrescoConnector with params: " + host + ":" + port.toString() + " " + username + ":" + password);
         }
-        final AlfrescoRestClient alfrescoClient = new AlfrescoRestClient(this.host, this.port.toString(), this.username, this.password);
+        final AlfrescoRestClient alfrescoClient = new AlfrescoRestClient(host, port.toString(), username, password);
         try {
-            final AlfrescoResponse response = this.executeFunction(alfrescoClient);
-            this.getOutputParameters().put(RESPONSE_DOCUMENT, response.getDocument());
-            this.getOutputParameters().put(RESPONSE_TYPE, response.getResponseType());
-            this.getOutputParameters().put(STATUS_CODE, response.getStatusCode());
-            this.getOutputParameters().put(STATUS_TEXT, response.getStatusText());
-            this.getOutputParameters().put(STACK_TRACE, response.getStackTrace());
+            final AlfrescoResponse response = executeFunction(alfrescoClient);
+            getOutputParameters().put(RESPONSE_DOCUMENT, response.getDocument());
+            getOutputParameters().put(RESPONSE_TYPE, response.getResponseType());
+            getOutputParameters().put(STATUS_CODE, response.getStatusCode());
+            getOutputParameters().put(STATUS_TEXT, response.getStatusText());
+            getOutputParameters().put(STACK_TRACE, response.getStackTrace());
         } catch (final Exception e) {
             throw new ConnectorException(e);
         }
@@ -81,16 +81,16 @@ public abstract class AlfrescoConnector extends AbstractConnector {
 
     @Override
     public void validateInputParameters() throws ConnectorValidationException {
-        this.fillGlobalInputParameters();
+        fillGlobalInputParameters();
         final List<String> errors = new ArrayList<String>();
-        if (this.port != null) {
-            if (this.port < 0) {
+        if (port != null) {
+            if (port < 0) {
                 errors.add("proxyPort cannot be less than 0!");
-            } else if (this.port > 65535) {
+            } else if (port > 65535) {
                 errors.add("proxyPort cannot be greater than 65535!");
             }
         }
-        final List<String> specificErrors = this.validateFunctionParameters();
+        final List<String> specificErrors = validateFunctionParameters();
         if (specificErrors != null) {
             errors.addAll(specificErrors);
         }
@@ -100,13 +100,13 @@ public abstract class AlfrescoConnector extends AbstractConnector {
     }
 
     private void fillGlobalInputParameters() {
-        this.host = (String) this.getInputParameter(HOST);
+        host = (String) this.getInputParameter(HOST);
         LOGGER.info(HOST + " " + host);
-        this.port = (Long) this.getInputParameter(PORT);
+        port = (Long) this.getInputParameter(PORT);
         LOGGER.info(PORT + " " + port);
-        this.username = (String) this.getInputParameter(USERNAME);
+        username = (String) this.getInputParameter(USERNAME);
         LOGGER.info(USERNAME + " " + username);
-        this.password = (String) this.getInputParameter(PASSWORD);
+        password = (String) this.getInputParameter(PASSWORD);
         LOGGER.info(PASSWORD + " " + password);
     }
 
