@@ -9,7 +9,7 @@
 	</parent>
 
     <artifactId>bonita-connector-alfresco34-common</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
     
 	<dependencies>
 		<dependency>
@@ -24,7 +24,11 @@
 				<exclusion>
 					<artifactId>xml-apis</artifactId>
 					<groupId>xml-apis</groupId>
-				</exclusion>			
+				</exclusion>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>    	
 			</exclusions>
 		</dependency>
 
