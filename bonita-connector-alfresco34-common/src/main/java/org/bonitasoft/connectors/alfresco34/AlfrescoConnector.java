@@ -107,7 +107,6 @@ public abstract class AlfrescoConnector extends AbstractConnector {
         username = (String) this.getInputParameter(USERNAME);
         LOGGER.info(USERNAME + " " + username);
         password = (String) this.getInputParameter(PASSWORD);
-        LOGGER.info(PASSWORD + " " + password);
     }
 
     protected abstract List<String> validateFunctionParameters();
