@@ -6,14 +6,14 @@
 	<parent>
 		<artifactId>bonita-connector-alfresco</artifactId>
 		<groupId>org.bonitasoft.connectors</groupId>
-		<version>1.0.0</version>
+		<version>1.1.2</version>
 	</parent>
 
 	<artifactId>bonita-connector-alfresco42-deleteitem-impl</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 
 	<properties>
-		<definition.version>1.1.0</definition.version>
+		<definition.version>1.1.2</definition.version>
 	</properties>
 
 

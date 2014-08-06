@@ -17,7 +17,7 @@
 	<input name="fileObject" type="java.lang.String" mandatory="true" />
 	<input name="fileName" type="java.lang.String" />
 	<input name="description" type="java.lang.String"/>
-	<input name="mimeType" type="java.lang.String" mandatory="true" defaultValue="text/plain" />
+	<input name="mimeType" type="java.lang.String" mandatory="true" defaultValue="octet/stream" />
 	<input name="destinationFolder" type="java.lang.String" mandatory="true" />
 	
 	<output name="responseDocument" type="org.apache.abdera.model.Document" />
