@@ -7,7 +7,7 @@
 	<icon>alfresco.jpg</icon>
 
 	<category id="cms" icon="cms.jpg" />
-	<category id="Alfresco" icon="alfresco.jpg" />
+	<category id="Alfresco" icon="alfresco.jpg" parentCategoryId="cms"/>
 	<category id="Alfresco42" icon="alfresco.jpg"  parentCategoryId="Alfresco"/>
 
 	<input name="host" type="java.lang.String" mandatory="true" defaultValue="localhost" />

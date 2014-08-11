@@ -5,10 +5,10 @@
 	<parent>
 		<artifactId>bonita-connector-alfresco</artifactId>
 		<groupId>org.bonitasoft.connectors</groupId>
-		<version>1.1.2</version>
+		<version>1.1.3</version>
 	</parent>
 
 	<artifactId>bonita-connector-alfresco42-deleteitem-def</artifactId>
-	<version>1.1.2</version>
+	<version>1.1.3</version>
 	
 </project>
