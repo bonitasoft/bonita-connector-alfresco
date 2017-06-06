@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>bonita-connector-alfresco</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1</version>
 
     <properties>
         <bonita.engine.version>6.3.2</bonita.engine.version>
@@ -180,6 +180,6 @@
         <developerConnection>scm:git:git@github.com:bonitasoft/bonita-connector-alfresco.git</developerConnection>
         <connection>scm:git:git@github.com:bonitasoft/bonita-connector-alfresco.git</connection>
         <url>https://github.com/bonitasoft/bonita-connector-alfresco</url>
-        <tag>HEAD</tag>
+        <tag>2.0.1</tag>
     </scm>
 </project>
