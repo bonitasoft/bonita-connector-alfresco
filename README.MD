@@ -1,5 +1,7 @@
 # Alfresco Connector
 
+**WARNING**: This project has been deprecated, you may use the [CMIS Connector](https://github.com/bonitasoft/bonita-connector-cmis) instead.
+
 Enables interactions in your BonitaBPM processes with an [Alfresco ECM](https://www.alfresco.com/products/enterprise-content-management/community) using [_Apache Abdera_](https://abdera.apache.org/).
 
 ## Description
